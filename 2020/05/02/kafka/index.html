@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Kafka |
+    Kafka基础架构及核心知识目录 |
     
     带天猫看飞猪的个人博客</title>
   
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Kafka
+      Kafka基础架构及核心知识目录
     </h1>
   
   
@@ -76,8 +76,7 @@
       
 
       
-        <p>@<a href="kafka基础架构及核心知识目录">TOC</a></p>
-<h1 id="一、kafka介绍以及说明"><a href="#一、kafka介绍以及说明" class="headerlink" title="一、kafka介绍以及说明"></a>一、kafka介绍以及说明</h1><h2 id="1-kafka介绍以及名字由来"><a href="#1-kafka介绍以及名字由来" class="headerlink" title="1.kafka介绍以及名字由来"></a>1.kafka介绍以及名字由来</h2><p>kafka是一款分布式的基于发布/订阅模式的消息队列，是目前比较主流的消息中间件，Kafka对消息保存时根据Topic（主题）进行归类，发送消息者称为Producer，消息接受者称为Consumer，此外kafka集群有多个kafka实例组成，每个实例(server)称为broker。无论是kafka集群，还是consumer都依赖于zookeeper集群保存一些meta信息，来保证系统可用性,==所以安装kafka需要先间搭建zookeeper集群，至于搭建zookeeper集群，请看本人zookeeper介绍那章节==。之所以取名kafka，据说是因为开发者非常喜欢奥地利作家卡夫卡，所以以此命名。</p>
+        <h1 id="一、kafka介绍以及说明"><a href="#一、kafka介绍以及说明" class="headerlink" title="一、kafka介绍以及说明"></a>一、kafka介绍以及说明</h1><h2 id="1-kafka介绍以及名字由来"><a href="#1-kafka介绍以及名字由来" class="headerlink" title="1.kafka介绍以及名字由来"></a>1.kafka介绍以及名字由来</h2><p>kafka是一款分布式的基于发布/订阅模式的消息队列，是目前比较主流的消息中间件，Kafka对消息保存时根据Topic（主题）进行归类，发送消息者称为Producer，消息接受者称为Consumer，此外kafka集群有多个kafka实例组成，每个实例(server)称为broker。无论是kafka集群，还是consumer都依赖于zookeeper集群保存一些meta信息，来保证系统可用性,==所以安装kafka需要先间搭建zookeeper集群，至于搭建zookeeper集群，请看本人zookeeper介绍那章节==。之所以取名kafka，据说是因为开发者非常喜欢奥地利作家卡夫卡，所以以此命名。</p>
 <pre><code>为什么需要zookeeper:Kafka集群中有一个broker会被选举为Controller，负责管理集群broker的上下线，所有topic的分区副本分配和leader选举等工作。Controller的管理工作都是依赖于Zookeeper的。</code></pre><h2 id="2-kafka数据存储"><a href="#2-kafka数据存储" class="headerlink" title="2.kafka数据存储"></a>2.kafka数据存储</h2><p>作为一款消息中间件，很多人误以为写入kafka数据是存储在内存中，但是实际上写入kafka的数据是存储在磁盘中，很多人都认为磁盘很慢，为此，官网专门有一张对此作出了说明(不过听官网语气，大意是人们认为觉得磁盘很慢，但是官网说很快，总结一句话就是：我不要你觉得，我要我觉得)</p>
 <p>在官方文档 4.2章持久化的介绍中，官网第一篇说了这样一句话:<img src="https://img-blog.csdnimg.cn/20191204201858812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMjY1ODc1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>    这句话的意思是：</p>
 <pre><code>不要害怕文件系统！(文件系统即磁盘) 
